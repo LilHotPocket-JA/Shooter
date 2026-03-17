@@ -9,10 +9,12 @@ public class FPSControl : MonoBehaviour
     public float sensitivity = 2;
 
     private Camera cam;
+    private float defWalk;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        defWalk = walkSpd;
         chara = GetComponent<CharacterController>();
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
@@ -25,7 +27,20 @@ public class FPSControl : MonoBehaviour
     {
         Movement();
         MouseLook();
+
+        if (Input.GetKey(KeyCode.LeftShift)) 
+        {
+            walkSpd = 10; 
+        }
+
+        else 
+        {
+            walkSpd = defWalk;
+        }
+
+
     }
+
 
     void Movement()
     {
