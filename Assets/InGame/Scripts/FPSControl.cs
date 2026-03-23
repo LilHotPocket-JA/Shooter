@@ -20,10 +20,12 @@ public class FPSControl : MonoBehaviour
     private Vector3 hitPoint;
     public ParticleSystem impact;
     [Range(10,30)] public int particleC = 20;
+    private Transform location;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        location = GetComponent<Transform>();
         runSpd = walkSpd * 2;
         defWalk = walkSpd;
         chara = GetComponent<CharacterController>();
@@ -54,9 +56,19 @@ public class FPSControl : MonoBehaviour
         {
             if (Input.GetMouseButtonDown(0))
             {
-                impact.transform.position = hitPoint;
-                impact.Emit(particleC);
-                DestroyObject(ObjectInFocus().gameObject);
+                if (ObjectInFocus().gameObject.tag == "Enemy")
+                {
+                    impact.transform.position = hitPoint;
+                    impact.Emit(particleC);
+                    DestroyObject(ObjectInFocus().gameObject);
+                }
+
+                else if(ObjectInFocus().gameObject.tag == "Box")
+                {
+                    ObjectInFocus().gameObject.transform.position = location.localPosition;
+                }
+
+
             }
         }
 
