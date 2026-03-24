@@ -63,12 +63,14 @@ public class FPSControl : MonoBehaviour
                     DestroyObject(ObjectInFocus().gameObject);
                 }
 
-                else if(ObjectInFocus().gameObject.tag == "Box")
+            }
+
+            else if (Input.GetMouseButton(1)) 
+            {
+                if (ObjectInFocus().gameObject.tag == "Box")
                 {
                     ObjectInFocus().gameObject.transform.position = location.localPosition;
                 }
-
-
             }
         }
 
